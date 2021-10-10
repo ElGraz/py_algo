@@ -1,4 +1,5 @@
 from __future__ import annotations
+import queue
 import random
 import sys
 
@@ -9,7 +10,7 @@ class BinaryTree:
         self.left = None
         self.right = None
         self.content = value
-        
+
     """Insert element in tree"""
     def insert(self, value: int):
 
@@ -21,6 +22,22 @@ class BinaryTree:
             self.left = self.__insert(self.left, value)
         elif value > self.content:
             self.right = self.__insert(self.right, value)
+
+    def print(self):
+        BinaryTree.print_subtree(self, 0)
+
+#   func by yozn
+    @staticmethod
+    def print_subtree(node, level=0):
+        if node is not None:
+            BinaryTree.print_subtree(node.left, level + 1)
+            #print(' ' * 4 * level + '>', node.content)
+            if node.left is not None:
+                print(' ' * (4 * level + 2) + "/")
+            print(' ' * 4 * level, node.content)
+            if node.right is not None:
+                print(' ' * (4 * level + 2) + "\\")
+            BinaryTree.print_subtree(node.right, level + 1)
 
     @staticmethod
     def __insert(node: BinaryTree, value: int):
@@ -63,6 +80,22 @@ class BinaryTree:
             elms.append(root.content)
         return elms
 
+    def bfs_traversal(self):
+        elms = list()
+#       we will use this list as a queue
+        q = list()
+        q.append(self)
+
+        while len(q) > 0:
+            curr_elm = q.pop(0)
+            elms.append(curr_elm.content)
+
+            if curr_elm.left:
+                q.append(curr_elm.left)
+            if curr_elm.right:
+                q.append(curr_elm.right)
+        return elms
+
 
 if __name__ == "__main__":
     SIZE = 16
@@ -81,9 +114,14 @@ if __name__ == "__main__":
     for _ in range(SIZE):
         tree.insert(random.randint(0, RANGE))
 
-    print("InOrder Traversal")
+    tree.print()
+
+    print("DFS InOrder Traversal")
     print(tree.inorder_traversal())
-    print("PreOrder Traversal")
+    print("DFS PreOrder Traversal")
     print(tree.preorder_traversal())
-    print("PostOrder Traversal")
+    print("DFS PostOrder Traversal")
     print(tree.postorder_traversal())
+
+    print("BFS Traversal")
+    print(tree.bfs_traversal())
