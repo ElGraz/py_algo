@@ -74,9 +74,10 @@ if __name__ == "__main__":
         try:
             SIZE = int(sys.argv[1])
             CONCENTRATION = int(sys.argv[2])
-        except:
+        except ValueError:
             print(
-                "Invalid values %s:\nUsage: list_searches [list_size] [max_value]"
+                "Invalid values %s:\n"
+                "Usage: list_searches [list_size] [max_value]"
                 % str(sys.argv[1:])
             )
             sys.exit(1)

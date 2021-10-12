@@ -111,16 +111,17 @@ if __name__ == "__main__":
         try:
             SIZE = int(sys.argv[1])
             RANGE = int(sys.argv[2])
-        except:
+        except ValueError:
             print(
-                "Invalid values %s:\nUsage: tree_traversals [tree_size] [tree_max_value]"
+                "Invalid values %s:\n"
+                "Usage: tree_traversals [tree_size] [tree_max_value]"
                 % str(sys.argv[1:])
             )
             sys.exit(1)
 
     print(
-        "Creating tree of %d random values from 0 to %d (collisions will be voided)\n"
-        % (SIZE, RANGE)
+        "Creating tree of %d random values from 0 to %d"
+        " (collisions will be voided)\n" % (SIZE, RANGE)
     )
     tree = BinaryTree(random.randint(0, RANGE))
     for _ in range(SIZE):
