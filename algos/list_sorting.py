@@ -1,11 +1,10 @@
 from __future__ import annotations
-from collections.abc import Callable
+
+import math
 import random
 import sys
-import math
 import time
-
-from _emerge.search import search
+from collections.abc import Callable
 
 
 def bubble_sort(data: list[int]) -> int:
@@ -60,7 +59,9 @@ def insert_sort(data: list[int]) -> int:
         current_value = data[index]
         current_position = index
 
-        while current_position > 0 and data[current_position - 1] > current_value:
+        while (
+            current_position > 0 and data[current_position - 1] > current_value
+        ):
             steps += 1
             data[current_position] = data[current_position - 1]
             current_position -= 1
@@ -91,15 +92,22 @@ def quick_sort(data: list[int]) -> int:
     return _quicksort(data, 0, len(data) - 1)
 
 
-
-def test_sort(sort_function: Callable[list[int]], sort_name: str):
+def test_sort(sort_function: Callable[[list[int]], int], sort_name: str):
     print("\nTesting %s:" % sort_name)
-    print("  on random data: sorted with %d steps" % (sort_function(list(data))))
-    print("  on sorted data: sorted with %d steps\n" % (sort_function(list(sorted_data))))
+    print(
+        "  on random data: sorted with %d steps" % (sort_function(list(data)))
+    )
+    print(
+        "  on sorted data: sorted with %d steps\n"
+        % (sort_function(list(sorted_data)))
+    )
     start_time = time.monotonic()
     try:
         sort_function(list(big_data))
-        print("  Time on %d random elements: %fs" % (BIG_SET, time.monotonic() - start_time))
+        print(
+            "  Time on %d random elements: %fs"
+            % (BIG_SET, time.monotonic() - start_time)
+        )
     except RecursionError as e:
         print("  Time on %d random elements: DNF (%s)" % (BIG_SET, str(e)))
 
@@ -113,7 +121,10 @@ if __name__ == "__main__":
         try:
             SIZE = int(sys.argv[1])
         except:
-            print("Invalid values %s:\nUsage: list_searches [list_size] [max_value]" % str(sys.argv[1:]))
+            print(
+                "Invalid values %s:\nUsage: list_searches [list_size] [max_value]"
+                % str(sys.argv[1:])
+            )
             sys.exit(1)
 
     print("Creating list from a range 0,%d \n" % SIZE)
@@ -132,11 +143,3 @@ if __name__ == "__main__":
     test_sort(selection_sort, "Selection sort")
     test_sort(insert_sort, "Insert sort")
     test_sort(quick_sort, "Quick sort")
-
-
-
-
-
-
-
-
