@@ -3,10 +3,9 @@ from __future__ import annotations
 import math
 import random
 import sys
-from typing import Tuple
 
 
-def binary_search(needle: int, haystack: list[int]) -> Tuple[bool, int]:
+def binary_search(needle: int, haystack: list[int]) -> tuple[bool, int]:
     steps = 0
 
     left = 0
@@ -26,7 +25,7 @@ def binary_search(needle: int, haystack: list[int]) -> Tuple[bool, int]:
     return False, steps
 
 
-def jump_search(needle: int, haystack: list[int]) -> Tuple[bool, int]:
+def jump_search(needle: int, haystack: list[int]) -> tuple[bool, int]:
     steps = 0
     data_len = len(haystack)
     # Finding block size to be jumped

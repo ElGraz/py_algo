@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import random
 import sys
+from collections import deque
 from typing import Optional
 
 
@@ -88,12 +89,12 @@ class BinaryTree:
 
     def bfs_traversal(self):
         elms = list()
-        #       we will use this list as a queue
-        q = list()
+        # DoubleEnded Queue
+        q = deque()
         q.append(self)
 
         while len(q) > 0:
-            curr_elm = q.pop(0)
+            curr_elm = q.popleft()
             elms.append(curr_elm.content)
 
             if curr_elm.left:
